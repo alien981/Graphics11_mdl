@@ -68,6 +68,31 @@ def run(filename):
                     t = make_rotZ(theta)
                 matrix_mult( stack[-1], t )
                 stack[-1] = [ x[:] for x in t]
+            elif q[0] == 'scale':
+                t = make_scale(float(q[1]), float(q[2]), float(q[3]))
+                matrix_mult( stack[-1], t )
+                stack[-1] = [ x[:] for x in t]
+            elif q[0] == 'box':
+                add_box(tmp,
+                    float(q[1]), float(q[2]), float(q[3]),
+                    float(q[4]), float(q[5]), float(q[6]))
+                matrix_mult( stack[-1], tmp )
+                draw_polygons(tmp, screen, zbuffer, view, ambient, light, areflect, dreflect, sreflect)
+                tmp = []
+            elif q[0] == 'sphere':
+                add_sphere(tmp,
+                       float(q[1]), float(q[2]), float(q[3]),
+                       float(q[4]), step_3d)
+                matrix_mult( stack[-1], tmp )
+                draw_polygons(tmp, screen, zbuffer, view, ambient, light, areflect, dreflect, sreflect)
+                tmp = []
+            elif q[0] == 'torus':
+                add_torus(tmp,
+                      float(q[1]), float(q[2]), float(q[3]),
+                      float(q[4]), float(q[5]), step_3d)
+                matrix_mult( stack[-1], tmp )
+                draw_polygons(tmp, screen, zbuffer, view, ambient, light, areflect, dreflect, sreflect)
+                tmp = []
     else:
         print "Parsing failed."
         return
