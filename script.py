@@ -93,6 +93,13 @@ def run(filename):
                 matrix_mult( stack[-1], tmp )
                 draw_polygons(tmp, screen, zbuffer, view, ambient, light, areflect, dreflect, sreflect)
                 tmp = []
+            elif q[0] == 'line':
+                add_edge( tmp,
+                      float(q[1]), float(q[2]), float(q[3]),
+                      float(q[4]), float(q[5]), float(q[6]) )
+                matrix_mult( stack[-1], tmp )
+                draw_lines(tmp, screen, zbuffer, color)
+                tmp = []
     else:
         print "Parsing failed."
         return
