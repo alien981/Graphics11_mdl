@@ -51,13 +51,12 @@ def run(filename):
                 if q[0] == 'display':
                     display(screen)
                 else:
-                    save_extension(screen, args[0])
+                    save_extension(screen, q[1])
             elif q[0] == 'move':
                 t = make_translate(float(q[1]), float(q[2]), float(q[3]))
                 w = stack.pop()
                 matrix_mult(w, t)
                 stack.append(t)
-                print stack
             elif q[0] == 'rotate':
                 theta = float(q[2]) * (math.pi / 180)
                 if q[1] == 'x':
