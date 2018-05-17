@@ -40,9 +40,18 @@ def run(filename):
     step_3d = 20
 
     p = mdl.parseFile(filename)
-
     if p:
         (commands, symbols) = p
+        for q in commands:
+            if q[0] == 'push':
+                stack.append( [x[:] for x in stack[-1]] )
+            elif q[0] == 'pop':
+		stack.pop()
+            elif q[0] == 'display' or q[0] == 'save':
+                if q[0] == 'display':
+                    display(screen)
+                else:
+                    save_extension(screen, args[0])
     else:
         print "Parsing failed."
         return
