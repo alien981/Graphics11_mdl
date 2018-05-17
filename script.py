@@ -52,6 +52,22 @@ def run(filename):
                     display(screen)
                 else:
                     save_extension(screen, args[0])
+            elif q[0] == 'move':
+                t = make_translate(float(q[1]), float(q[2]), float(q[3]))
+                w = stack.pop()
+                matrix_mult(w, t)
+                stack.append(t)
+                print stack
+            elif q[0] == 'rotate':
+                theta = float(q[2]) * (math.pi / 180)
+                if q[1] == 'x':
+                    t = make_rotX(theta)
+                elif q[1] == 'y':
+                    t = make_rotY(theta)
+                else:
+                    t = make_rotZ(theta)
+                matrix_mult( stack[-1], t )
+                stack[-1] = [ x[:] for x in t]
     else:
         print "Parsing failed."
         return
